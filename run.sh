@@ -1,15 +1,18 @@
 #/bin/bash
 
+APP_NAME=${APP_NAME:="starter_pack"}
+
+docker ps -a -q --filter name=${APP_NAME} | xargs -I {} sh -c 'docker stop {}; docker rm -f {}'
+
 function default {
-  docker build --tag starter-pack .
-  docker network create starter-pack-local
-  docker run -it --network ramshaw_network --publish 5100:5100 starter-pack bash
+  docker build --tag ${APP_NAME} .
+  docker run -it --publish 5200:5200 ${APP_NAME}
 }
 
 case $1 in
   "pip")
-    docker build --tag starter-pack .
-    docker run -it starter-pack cat Pipfile.lock > Pipfile.lock
+    docker build --tag ${APP_NAME} .
+    docker run -it ${APP_NAME} cat Pipfile.lock > Pipfile.lock
     ;;
   *)
     default
