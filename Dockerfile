@@ -1,8 +1,7 @@
 FROM python:3.7.1
-RUN pip install pipenv
 WORKDIR /root
-ADD Pipfile* /root/
-RUN pipenv install --three
+ADD requirements.txt /root/
+RUN pip install -r requirements.txt
 ADD run.py .
 ADD starter_pack starter_pack
-CMD pipenv run python run.py
+CMD python run.py
