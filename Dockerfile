@@ -1,4 +1,4 @@
-FROM python:3.7.0
+FROM python:3.7.1
 RUN pip install pipenv
 WORKDIR /root
 ADD Pipfile* /root/
