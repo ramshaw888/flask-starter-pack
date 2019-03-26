@@ -1,4 +1,3 @@
-import flask
 import starter_pack.routing as routing
 from starter_pack.routes.ping import Ping
 

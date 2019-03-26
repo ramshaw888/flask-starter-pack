@@ -16,6 +16,11 @@ function default {
       ${APP_NAME}
 }
 
+function lint {
+  build
+  docker run -v $(pwd):/root -it ${APP_NAME} bash -c 'pip install flake8 && flake8'
+}
+
 function pip_compile {
   build
   docker run -v $(pwd):/root -it ${APP_NAME} bash -c 'pip install pip-tools && pip-compile'
@@ -24,6 +29,9 @@ function pip_compile {
 case $1 in
   "pip-compile")
     pip_compile
+    ;;
+  "lint")
+    lint
     ;;
   "build")
     build
