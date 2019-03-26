@@ -10,7 +10,10 @@ function build {
 
 function default {
   build
-  docker run -it --publish 5200:5200 ${APP_NAME}
+  docker run -it \
+      --env "APP_GUNICORN_BIND=0:5200" \
+      --publish 5200:5200 \
+      ${APP_NAME}
 }
 
 function pip_compile {
