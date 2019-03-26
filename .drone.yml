@@ -1,17 +1,10 @@
----
 kind: pipeline
 name: default
 
 steps:
-- name: test
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
+- name: lint
+  image: python
   commands:
-  - docker ps -a
-
-volumes:
-- name: dockersock
-  host:
-    path: /var/run/docker.sock
+  - pip install -r requirements.txt
+  - pip install flake8
+  - flake8
