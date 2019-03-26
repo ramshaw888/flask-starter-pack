@@ -1,0 +1,3 @@
+FROM starter_pack
+RUN pip install pip-tools
+RUN pip install flake8
