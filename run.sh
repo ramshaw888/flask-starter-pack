@@ -13,7 +13,15 @@ function default {
   docker run -it --publish 5200:5200 ${APP_NAME}
 }
 
+function pip_compile {
+  build
+  docker run -v $(pwd):/root -it ${APP_NAME} bash -c 'pip install pip-tools && pip-compile'
+}
+
 case $1 in
+  "pip-compile")
+    pip_compile
+    ;;
   "build")
     build
     ;;
